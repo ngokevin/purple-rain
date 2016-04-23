@@ -9,6 +9,7 @@
     <script src="assets/SVGLoader.js"></script>
     <script src="components/aframe-randomizer-components.min.js"></script>
     <script src="components/aframe-template-component.min.js"></script>
+    <script src="components/aframe-vid-shader.min.js"></script>
     <script src="components/entity-generator.js"></script>
     <script src="components/extrude-svg.js"></script>
   </head>
@@ -23,7 +24,7 @@
                  material="color: #590D82; shader: flat"
                  random-position="min: -6 -6 -6; max: 6 6 3"></a-mixin>
         <a-mixin id="spotlight"
-                 light="angle: 160; color: #FFF; intensity: 0.8; type: spot"
+                 light="angle: 160; color: #FFF; intensity: 0.7; type: spot"
                  rotation="45 45 0"></a-mixin>
         <a-mixin id="candlelight"
                  geometry="primitive: sphere; radius: 0.2; segments: 4"
@@ -34,6 +35,7 @@
         <a-mixin id="candle-right" template="src: #candle-template"
                  random-spherical-position="startX: 0; lengthX: 40; lengthY: 180;
                                             radius: 80"></a-mixin>
+        <video id="prince-video" autoplay loop src="assets/prince.mp4"></video>
         <script id="candle-template" type="text/html">
           <a-entity>
             <a-entity mixin="candlelight" position="0 1 0"></a-entity>
@@ -54,6 +56,13 @@
                 material="color: #BD1EEE; metalness: 0.1; roughness: 0.6"
                 scale="0.34 0.34 0.34" rotation="90 0 0" position="-103 1 -220"></a-entity>
       <a-image src="#prince" position="0 5 -3" scale="3 5 3"></a-image>
+      <a-entity geometry="primitive: plane; height: 10; width: 20"
+                material="shader: video; src: #prince-video; opacity: 0.2"
+                position="0 25 -10" rotation="40 0 0"></a-entity>
+
+      <a-entity geometry="primitive: circle; radius: 4.5"
+                material="color: #111; shader: flat; side: double"
+                rotation="-90 0 0" position="0 3 -15"></a-entity>
 
       <!-- Rain. -->
       <a-entity id="rain-generator" entity-generator="mixin: raindrop; num: 200"
@@ -73,8 +82,8 @@
       <a-light mixin="spotlight" position="-20 25 -40"></a-light>
       <a-light mixin="spotlight" position="20 25 -40"></a-light>
 
-      <a-sky color="#000"></a-sky>
-      <a-entity geometry="primitive: plane; height: 100; width: 100"
+      <a-sky color="#112"></a-sky>
+      <a-entity geometry="primitive: circle; radius: 40"
                 material="color: #333; src: #ground; repeat: 100 100; metalness: 0;
                           roughness: 0.8"
                 rotation="-90 0 0"></a-entity>
