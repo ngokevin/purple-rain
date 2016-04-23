@@ -13,22 +13,18 @@
   <body>
     <a-scene>
       <a-assets>
-        <audio id="purplerain" src="assets/purplerain.mp3"></audio>
         <img id="ground" src="assets/ground.jpg">
         <img id="love" src="assets/love.svg">
         <img id="prince" src="assets/prince.png">
         <a-mixin id="raindrop"
-                 geometry="primitive: box; depth: 0.01; height: 0.03; width: 0.01"
+                 geometry="primitive: box; depth: 0.008; height: 0.05; width: 0.008"
                  material="color: #590D82; shader: flat"></a-mixin>
         <a-mixin id="spotlight"
                  light="angle: 160; color: #FFF; intensity: 0.8; type: spot"
                  rotation="45 45 0"></a-mixin>
       </a-assets>
 
-      <!--
-      <a-entity id="audio" sound="autoplay: true; loop: true;
-                                  src: assets/purplerain.mp3"></a-entity>
-      -->
+      <audio autoplay loop src="assets/purplerain.mp3"></audio>
 
       <a-entity svg-extrude-geometry="src: #love; bevelThickness: 4; curveSegments: 64"
                 material="color: purple; metalness: 0.1; roughess: 0.7"
