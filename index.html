@@ -11,15 +11,17 @@
     <script src="components/aframe-randomizer-components.min.js"></script>
     <script src="components/aframe-template-component.min.js"></script>
     <script src="components/aframe-vid-shader.min.js"></script>
+    <script src="components/color-copy.js"></script>
     <script src="components/color-on-kick.js"></script>
     <script src="components/entity-generator.js"></script>
+    <script src="components/light-color-copy.js"></script>
     <script src="components/spotlight-target.js"></script>
     <script src="components/svg-extrude-geometry.js"></script>
   </head>
   <body>
     <a-scene>
       <a-assets>
-        <audio id="purplerain-audio" src="assets/purplerain.mp3"></audio>
+        <audio id="purplerain-audio" src="assets/purplerain.mp3" loop></audio>
         <img id="ground" src="assets/ground.jpg">
         <img id="love" src="assets/love.svg">
         <img id="prince-img" src="assets/prince.png">
@@ -78,12 +80,18 @@
       </a-entity>
 
       <!-- Banner. -->
-      <a-entity geometry="primitive: cylinder; radius: 50; openEnded: true"
-                material="color: #BD1EEE; side: double; roughness: 1"
+      <a-entity id="banner"
+                geometry="primitive: cylinder; radius: 50; openEnded: true;
+                          segmentsRadial: 52"
+                material="color: #BD1EEE; side: back; shader: flat"
                 position="0 35 0"
                 audio-visualizer="src: #purplerain-audio"
-                audio-visualizer-kick="decay: .0005; frequency: 130, 140; threshold: .0025"
+                audio-visualizer-kick="decay: .0005; frequency: 130, 140; threshold: .0075"
                 color-on-kick></a-entity>
+      <a-entity geometry="primitive: cylinder; radius: 50; openEnded: true;
+                          segmentsRadial: 52"
+                material="color: #BD1EEE; side: back; shader: flat"
+                color-copy="#banner" rotation="90 0 0"></a-entity>
 
       <!-- Camera. -->
       <a-entity camera look-controls position="0 5 10"></a-entity>
@@ -92,9 +100,16 @@
       <a-entity entity-generator="mixin: candle-right; num: 150"></a-entity>
       <a-entity entity-generator="mixin: candle-left; num: 80" rotation="0 -90 0"></a-entity>
 
-      <a-light type="ambient" color="#343"></a-light>
+      <a-light type="ambient" color="#343" light-color-copy="target: #banner"></a-light>
       <a-entity mixin="spotlight" position="-40 60 -130"></a-entity>
       <a-entity mixin="spotlight" position="40 60 -130"></a-entity>
+
+      <a-entity>
+        <a-animation attribute="rotation" to="0 360 0" dur="10000"
+                     easing="linear" repeat="indefinite"></a-animation>
+        <a-light type="point" color="#888" intensity="1.3" distance="25"
+                 position="0 0 20"></a-light>
+      </a-entity>
 
       <a-sky color="#112"></a-sky>
       <a-entity geometry="primitive: circle; radius: 40"
