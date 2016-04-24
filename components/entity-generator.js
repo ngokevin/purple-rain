@@ -1,5 +1,5 @@
 /**
- * Create ton of entities at random positions.
+ * Create number of entities given a mixin.
  */
 AFRAME.registerComponent('entity-generator', {
   schema: {
